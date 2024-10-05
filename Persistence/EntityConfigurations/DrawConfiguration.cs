@@ -11,7 +11,7 @@ public class DrawConfiguration : IEntityTypeConfiguration<Draw>
         builder.ToTable("Draws").HasKey(d => d.Id);
 
         builder.Property(d => d.Id).HasColumnName("Id").IsRequired();
-        builder.Property(d => d.Picker).HasColumnName("Picker");
+        builder.Property(d => d.PickerId).HasColumnName("PickerId");
         builder.Property(d => d.TeamId).HasColumnName("TeamId");
         builder.Property(d => d.GroupId).HasColumnName("GroupId");
         builder.Property(d => d.CreatedDate).HasColumnName("CreatedDate").IsRequired();

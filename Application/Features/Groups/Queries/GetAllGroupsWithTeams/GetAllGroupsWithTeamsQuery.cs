@@ -17,7 +17,6 @@ namespace Application.Features.Groups.Queries.GetAllGroupsWithTeams
 {
     public class GetAllGroupsWithTeamsQuery : IRequest<List<GetAllGroupsWithTeamsDto>>
     {
-        public string MatchName { get; set; }
         public class GetAllGroupsWithTeamsQueryHandler : IRequestHandler<GetAllGroupsWithTeamsQuery, List<GetAllGroupsWithTeamsDto>>
         {
             private readonly IGroupRepository _groupRepository;
@@ -32,7 +31,6 @@ namespace Application.Features.Groups.Queries.GetAllGroupsWithTeams
             public async Task<List<GetAllGroupsWithTeamsDto>> Handle(GetAllGroupsWithTeamsQuery request, CancellationToken cancellationToken)
             {
                 IPaginate<Group> groups = await _groupRepository.GetListAsync(
-                    predicate: p => p.MatchName == request.MatchName,
                     include: m => m.Include(m => m.Teams),
                     index: 0,
                     size: 8,

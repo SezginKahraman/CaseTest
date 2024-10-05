@@ -40,7 +40,7 @@ namespace Application.Features.Teams.Queries.GetAllSeparatedByGroupId
                     cancellationToken: cancellationToken
                 );
 
-                IPaginate<Group> groups = await _groupsService.GetListAsync(predicate => predicate.MatchName == request.MatchName,
+                IPaginate<Group> groups = await _groupsService.GetListAsync(
                     include: m => m.Include(m => m.Teams)
                     ,index: 0, size: 10);
 

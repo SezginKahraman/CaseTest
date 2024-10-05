@@ -12,7 +12,6 @@ public class GroupConfiguration : IEntityTypeConfiguration<Group>
 
         builder.Property(g => g.Id).HasColumnName("Id").IsRequired();
         builder.Property(g => g.Name).HasColumnName("Name");
-        builder.Property(g => g.MatchName).HasColumnName("MatchName");
         builder.Property(g => g.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(g => g.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(g => g.DeletedDate).HasColumnName("DeletedDate");

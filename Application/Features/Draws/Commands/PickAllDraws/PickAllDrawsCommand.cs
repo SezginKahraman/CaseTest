@@ -41,7 +41,7 @@ namespace Application.Features.Draws.Commands.PickAllDraws
 
             public async Task<GetListResponse<CreatedDrawAllResponse>> Handle(PickAllDrawsCommand request, CancellationToken cancellationToken)
             {
-                IPaginate<Group> groups = await _groupsService.GetListAsync(predicate => predicate.MatchName == request.MatchName, index:0, size:10);
+                IPaginate<Group> groups = await _groupsService.GetListAsync(index:0, size:10);
                 IPaginate<Team> teams = await _teamsService.GetListAsync(index:0, size:32);
 
                 bool isTeamSelected;

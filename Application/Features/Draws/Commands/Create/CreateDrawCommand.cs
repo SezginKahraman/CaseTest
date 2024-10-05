@@ -132,8 +132,18 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
 
             await _groupTeamRepository.AddRangeAsync(groupTeamList);
 
-            CreatedDrawResponse response = _mapper.Map<CreatedDrawResponse>(draw);
-            return response;
+            var response = groupTeamList
+             .GroupBy(t => t.GroupId)
+             .Select(g => new GroupResponse()
+             {
+                 GroupName = groupResults.Items.FirstOrDefault(t => t.Id == g.Key)?.Name,
+                 Teams = g.Select(t => new TeamResponse
+                 {
+                     Name = teamsResult.Items.FirstOrDefault(s => s.Id == t.Id)?.Name
+                 }).ToList()
+             }).ToList();
+
+            return new CreatedDrawResponse() { Group = response };
         }
     }
 }

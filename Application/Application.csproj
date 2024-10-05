@@ -19,4 +19,15 @@
 		<PackageReference Include="MediatR" Version="12.0.1" />
 	</ItemGroup>
 	
+	<ItemGroup>
+	  <Folder Include="Features\GroupTeams\Constants\" />
+	  <Folder Include="Features\GroupTeams\Queries\GetById\" />
+	  <Folder Include="Features\GroupTeams\Queries\GetList\" />
+	  <Folder Include="Features\GroupTeams\Rules\" />
+	  <Folder Include="Features\Pickers\Constants\" />
+	  <Folder Include="Features\Pickers\Queries\GetById\" />
+	  <Folder Include="Features\Pickers\Queries\GetList\" />
+	  <Folder Include="Features\Pickers\Rules\" />
+	</ItemGroup>
+	
 </Project>

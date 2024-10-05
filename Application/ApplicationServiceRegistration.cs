@@ -7,6 +7,8 @@ using Application.Services.Draws;
 using Application.Services.Groups;
 using Application.Services.Teams;
 using Core.Application.Pipelines.Validation;
+using Application.Services.GroupTeams;
+using Application.Services.Pickers;
 
 namespace Application;
 
@@ -25,13 +27,12 @@ public static class ApplicationServiceRegistration
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-        
-
-
         services.AddScoped<ICountriesService, CountriesManager>();
         services.AddScoped<IDrawsService, DrawsManager>();
         services.AddScoped<IGroupsService, GroupsManager>();
         services.AddScoped<ITeamsService, TeamsManager>();
+        services.AddScoped<IGroupTeamsService, GroupTeamsManager>();
+        services.AddScoped<IPickersService, PickersManager>();
         return services;
     }
 

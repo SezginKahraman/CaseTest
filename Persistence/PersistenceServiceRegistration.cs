@@ -20,6 +20,8 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IDrawRepository, DrawRepository>();
         services.AddScoped<IGroupRepository, GroupRepository>();
         services.AddScoped<ITeamRepository, TeamRepository>();
+        services.AddScoped<IGroupTeamRepository, GroupTeamRepository>();
+        services.AddScoped<IPickerRepository, PickerRepository>();
         return services;
     }
 }

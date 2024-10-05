@@ -46,13 +46,13 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
         {
             await _groupBusinessRules.NumberOfGroupsMustFourOrEight(request.GroupCount);
 
-            var groupResults = await _groupRepository.GetListAsync(size:request.GroupCount);
+            var groupResults = await _groupRepository.GetListAsync(size: request.GroupCount);
             Random random = new Random();
 
-            var teamsResult = await _teamRepository.GetListAsync(size:32);
-            var teams = teamsResult.Items.OrderBy(t => random.Next()).ToList();
+            var teamsResult = await _teamRepository.GetListAsync(size: 32);
+            var shuffledTeams = teamsResult.Items.OrderBy(t => random.Next()).ToList();
 
-            var groups = groupResults.Items.ToList();
+            //var groups = groupResults.Items.ToList();
 
             Draw draw = _mapper.Map<Draw>(request);
 
@@ -61,47 +61,72 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
             var groupTeamList = new List<GroupTeam>();
             var index = 0;
 
-            foreach (var group in groups)
+            //var random = new Random();
+
+            // Takýmlarý shuffle ediyoruz
+            //var shuffledTeams = teams.OrderBy(x => random.Next()).ToList();
+
+            // Gruplarý oluþturacaðýmýz liste
+            var groups = new List<List<Team>>(request.GroupCount);
+
+            // Her grup için boþ bir liste oluþturuyoruz
+            for (int i = 0; i < request.GroupCount; i++)
             {
-                while (teams.Any())
+                groups.Add(new List<Team>());
+            }
+
+            // Gruplara eþit sayýda takým eklemek için gruplarýn maksimum boyutunu hesaplýyoruz
+            int teamsPerGroup = shuffledTeams.Count / request.GroupCount;
+            int remainingTeams = shuffledTeams.Count % request.GroupCount;
+
+            // Takýmlarý gruplara sýrayla ve countryId'lere dikkat ederek ekliyoruz
+            foreach (var team in shuffledTeams)
+            {
+                bool teamAdded = false;
+
+                // En küçük doluluða sahip uygun bir grup bulmaya çalýþýyoruz
+                foreach (var group in groups.OrderBy(g => g.Count))
                 {
-                    var relatedTeam = teams[index];
-                    var relatedGroups = groupTeamList.Where(t => t.GroupId == group.Id);
-                    var isSameCountry = false;
-
-                    foreach (var relatedGroupTeam in relatedGroups)
+                    if (!group.Any(t => t.CountryId == team.CountryId) && group.Count < teamsPerGroup + (remainingTeams > 0 ? 1 : 0))
                     {
-                        var relatedTeamEntity = teams.FirstOrDefault(t => t.Id == relatedGroupTeam.TeamId);
-                        if (relatedTeamEntity != null)
+                        group.Add(team);
+                        teamAdded = true;
+
+                        // Eðer fazladan bir takýmý bu gruba eklediysek, remainingTeams'i azaltýyoruz
+                        if (group.Count == teamsPerGroup + 1)
                         {
-                            if (relatedTeamEntity.CountryId == relatedTeam.CountryId)
-                            {
-                                isSameCountry = true;
-                            }
+                            remainingTeams--;
                         }
+                        break;
                     }
-                    if (isSameCountry)
+                }
+
+                // Eðer uygun grup bulamadýysak (ayný ülkeye sahip takýmlardan dolayý), en küçük gruba zorla ekliyoruz
+                if (!teamAdded)
+                {
+                    var fallbackGroup = groups.OrderBy(g => g.Count).First();
+                    fallbackGroup.Add(team);
+
+                    if (fallbackGroup.Count == teamsPerGroup + 1)
                     {
-                        continue;
+                        remainingTeams--;
                     }
+                }
+            }
 
-                    isSameCountry = false;
-
-                    GroupTeam groupTeam = new GroupTeam()
+            // Sonuç olarak gruplara daðýtýlmýþ takýmlar
+            for (int i = 0; i < groups.Count; i++)
+            {
+                Console.WriteLine($"Group {i + 1}:");
+                foreach (var team in groups[i])
+                {
+                    Console.WriteLine($"Team {team.Name} - CountryId {team.CountryId}");
+                    groupTeamList.Add(new GroupTeam()
                     {
-                        TeamId = relatedTeam.Id,
-                        GroupId = group.Id,
+                        TeamId = team.Id,
+                        GroupId = i + 1,
                         DrawId = draw.Id
-                    };
-
-                    // Elemaný listeden çýkar
-                    teams.RemoveAt(index);
-                    groupTeamList.Add(groupTeam);
-                    if(groupTeamList.Count != request.GroupCount)
-                    {
-                        continue;
-                    }
-                    index++;
+                    });
                 }
             }
 

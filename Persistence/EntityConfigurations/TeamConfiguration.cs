@@ -29,24 +29,28 @@ public class TeamConfiguration : IEntityTypeConfiguration<Team>
 
         Team adessoIstanbul = new()
         {
+            Id = 1,
             CountryId = 1,
             GroupId = null,
             Name = "Adesso Istanbul",
         };
         Team adessoAnkara = new()
         {
+            Id = 2,
             CountryId = 1,
             GroupId = null,
             Name = "Adesso Ankara",
         };
         Team adessoIzmir = new()
         {
+            Id = 3,
             CountryId = 1,
             GroupId = null,
             Name = "Adesso Izmir",
         };
         Team adessoAntalya = new()
         {
+            Id = 4,
             CountryId = 1,
             GroupId = null,
             Name = "Adesso Antalya",
@@ -54,24 +58,28 @@ public class TeamConfiguration : IEntityTypeConfiguration<Team>
 
         Team adessoBerlin = new()
         {
+            Id = 5,
             CountryId = 2,
             GroupId = null,
             Name = "Adesso Berlin",
         };
         Team adessoFrankfurt = new()
         {
+            Id = 6,
             CountryId = 2,
             GroupId = null,
             Name = "Adesso Frankfurt",
         };
         Team adessoMunih = new()
         {
+            Id = 7,
             CountryId = 2,
             GroupId = null,
             Name = "Adesso Munih",
         };
         Team adessoDortmund = new()
         {
+            Id = 8,
             CountryId = 2,
             GroupId = null,
             Name = "Adesso Dortmund",
@@ -79,24 +87,28 @@ public class TeamConfiguration : IEntityTypeConfiguration<Team>
 
         Team adessoParis = new()
         {
+            Id = 9,
             CountryId = 3,
             GroupId = null,
             Name = "Adesso Paris",
         };
         Team adessoMarsilya = new()
         {
+            Id = 10,
             CountryId = 3,
             GroupId = null,
             Name = "Adesso Marsilya",
         };
         Team adessoNice = new()
         {
+            Id = 11,
             CountryId = 3,
             GroupId = null,
             Name = "Adesso Nice",
         };
         Team adessoLyon = new()
         {
+            Id = 12,
             CountryId = 3,
             GroupId = null,
             Name = "Adesso Lyon",
@@ -104,24 +116,28 @@ public class TeamConfiguration : IEntityTypeConfiguration<Team>
 
         Team adessoAmsterdam = new()
         {
+            Id = 13,
             CountryId = 4,
             GroupId = null,
             Name = "Adesso Amsterdam",
         };
         Team adessoRotterdam = new()
         {
+            Id = 14,
             CountryId = 4,
             GroupId = null,
             Name = "Adesso Rotterdam",
         };
         Team adessoLahey = new()
         {
+            Id = 15,
             CountryId = 4,
             GroupId = null,
             Name = "Adesso Lahey",
         };
         Team adessoEindhoven = new()
         {
+            Id = 16,
             CountryId = 4,
             GroupId = null,
             Name = "Adesso Eindhoven",
@@ -129,24 +145,28 @@ public class TeamConfiguration : IEntityTypeConfiguration<Team>
 
         Team adessoLisbon = new()
         {
+            Id = 17,
             CountryId = 5,
             GroupId = null,
             Name = "Adesso Lisbon",
         };
         Team adessoPorto = new()
         {
+            Id = 18,
             CountryId = 5,
             GroupId = null,
             Name = "Adesso Porto",
         };
         Team adessoBraga = new()
         {
+            Id = 19,
             CountryId = 5,
             GroupId = null,
             Name = "Adesso Braga",
         };
         Team adessoCoimbra = new()
         {
+            Id = 20,
             CountryId = 5,
             GroupId = null,
             Name = "Adesso Coimbra",
@@ -154,24 +174,28 @@ public class TeamConfiguration : IEntityTypeConfiguration<Team>
 
         Team adessoRoma = new()
         {
+            Id = 21,
             CountryId = 6,
             GroupId = null,
             Name = "Adesso Roma",
         };
         Team adessoMilano = new()
         {
+            Id = 22,
             CountryId = 6,
             GroupId = null,
             Name = "Adesso Milano",
         };
         Team adessoVenedik = new()
         {
+            Id = 23,
             CountryId = 6,
             GroupId = null,
             Name = "Adesso Venedik",
         };
         Team adessoNapoli = new()
         {
+            Id = 24,
             CountryId = 6,
             GroupId = null,
             Name = "Adesso Napoli",
@@ -179,24 +203,28 @@ public class TeamConfiguration : IEntityTypeConfiguration<Team>
 
         Team adessoSevilla = new()
         {
+            Id = 25,
             CountryId = 7,
             GroupId = null,
             Name = "Adesso Sevilla",
         };
         Team adessoMadrid = new()
         {
+            Id = 26,
             CountryId = 7,
             GroupId = null,
             Name = "Adesso Madrid",
         };
         Team adessoBarselona = new()
         {
+            Id = 27,
             CountryId = 7,
             GroupId = null,
             Name = "Adesso Barselona",
         };
         Team adessoGranada = new()
         {
+            Id = 28,
             CountryId = 7,
             GroupId = null,
             Name = "Adesso Granada",
@@ -204,24 +232,28 @@ public class TeamConfiguration : IEntityTypeConfiguration<Team>
 
         Team adessoBruksel = new()
         {
+            Id = 29,
             CountryId = 8,
             GroupId = null,
             Name = "Adesso Bruksel",
         };
         Team adessoBrugge = new()
         {
+            Id = 30,
             CountryId = 8,
             GroupId = null,
             Name = "Adesso Brugge",
         };
         Team adessoGent = new()
         {
+            Id = 31,
             CountryId = 8,
             GroupId = null,
             Name = "Adesso Gent",
         };
         Team adessoAnvers = new()
         {
+            Id = 32,
             CountryId = 8,
             GroupId = null,
             Name = "Adesso Anvers",

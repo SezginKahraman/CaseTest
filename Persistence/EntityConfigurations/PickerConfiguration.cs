@@ -20,8 +20,6 @@ namespace Persistence.EntityConfigurations
             builder.Property(c => c.UpdatedDate).HasColumnName("UpdatedDate");
             builder.Property(c => c.DeletedDate).HasColumnName("DeletedDate");
 
-            builder.HasMany(t => t.Draws).WithOne(t => t.Picker);
-
             builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
 
             builder.HasData(getSeeds());

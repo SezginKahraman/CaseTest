@@ -71,7 +71,7 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
                     // Seçilen elemaný çýkar ve yazdýr
                     int selectedNumber = numbers[randomIndex];
                     var relatedTeam = teams[selectedNumber];
-                    var relatedGroups = groupTeamList.Where(t => t.GroupId == groups[i].Id);
+                    var relatedGroups = groupTeamList.Where(t => t.GroupId == group.Id);
                     var isSameCountry = false;
 
                     foreach (var relatedGroupTeam in relatedGroups)

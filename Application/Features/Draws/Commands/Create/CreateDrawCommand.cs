@@ -1,5 +1,5 @@
 using Application.Features.Draws.Rules;
-using Application.Features.Groups.Commands.CreateGroups;
+using Application.Features.Groups.Commands.Create;
 using Application.Features.Groups.Rules;
 using Application.Services.Repositories;
 using AutoMapper;

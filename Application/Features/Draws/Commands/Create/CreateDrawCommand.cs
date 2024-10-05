@@ -61,7 +61,7 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
 
             var groupTeamList = new List<GroupTeam>();
 
-            for (int i = 0; i < request.GroupCount; i++)
+            foreach (var group in groups)
             {
                 while (numbers.Any())
                 {
@@ -92,13 +92,17 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
                     GroupTeam groupTeam = new GroupTeam()
                     {
                         TeamId = relatedTeam.Id,
-                        GroupId = groups[i].Id,
+                        GroupId = group.Id,
                         DrawId = draw.Id
                     };
 
                     // Elemaný listeden çýkar
                     numbers.RemoveAt(randomIndex);
                     groupTeamList.Add(groupTeam);
+                    if(groupTeamList.Count != request.GroupCount)
+                    {
+                        continue;
+                    }
                 }
             }
 

@@ -3,12 +3,15 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Application.Features.Draws.Queries.GetById;
 
 public class GetByIdDrawQuery : IRequest<GetByIdDrawResponse>
 {
     public int Id { get; set; }
+    public int PickerId { get; set; }
+    public string DrawName { get; set; }
 
     public class GetByIdDrawQueryHandler : IRequestHandler<GetByIdDrawQuery, GetByIdDrawResponse>
     {

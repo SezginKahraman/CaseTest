@@ -10,7 +10,7 @@ public class Draw : Entity<int>
     public int GroupId { get; set; }
     [ForeignKey(nameof(Picker))]
     public int PickerId { get; set; }
-    public string MatchName { get; set; }
+    public string DrawName { get; set; }
     public virtual Picker Picker { get; set; }
     public virtual ICollection<GroupTeam> GroupTeams { get; set; }
 }

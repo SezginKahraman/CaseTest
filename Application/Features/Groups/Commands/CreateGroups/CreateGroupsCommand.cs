@@ -29,24 +29,7 @@ public class CreateGroupsCommand : IRequest<GetListResponse<CreatedGroupsRespons
         public async Task<GetListResponse<CreatedGroupsResponse>> Handle(CreateGroupsCommand request, CancellationToken cancellationToken)
         {
 
-            _groupBusinessRules.NumberOfGroupsMustFourOrEight(request.NumberOfGroups);
-            
-            string[] staticGroupNames = { "A", "B", "C", "D", "E", "F", "G", "H" }; 
-            List<Group> addedGroups = new();
-            for (int i = 0; i < request.NumberOfGroups; i++)
-            {
-                Group group = new()
-                {
-                    MatchName = request.MatchName,
-                    Name = staticGroupNames[i]
-                };
-
-                await _groupRepository.AddAsync(group);
-                addedGroups.Add(group);
-            }
-
-            GetListResponse<CreatedGroupsResponse> response = _mapper.Map<GetListResponse<CreatedGroupsResponse>>(addedGroups);
-            return response;
+           
         }
     }
 }

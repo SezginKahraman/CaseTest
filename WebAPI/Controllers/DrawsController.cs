@@ -21,13 +21,6 @@ public class DrawsController : BaseController
 
         return Created(uri: "", response);
     }
-    [HttpPost("pickAll")]
-    public async Task<IActionResult> PickAllDraws([FromBody] PickAllDrawsCommand pickAllDrawsCommand)
-    {
-        GetListResponse<CreatedDrawAllResponse> response = await Mediator.Send(pickAllDrawsCommand);
-
-        return Ok(response);
-    }
 
     [HttpPut]
     public async Task<IActionResult> Update([FromBody] UpdateDrawCommand updateDrawCommand)

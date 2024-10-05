@@ -72,9 +72,12 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
                     foreach (var relatedGroupTeam in relatedGroups)
                     {
                         var relatedTeamEntity = teams.FirstOrDefault(t => t.Id == relatedGroupTeam.TeamId);
-                        if(relatedTeamEntity.CountryId == relatedTeam.CountryId)
+                        if (relatedTeamEntity != null)
                         {
-                            isSameCountry = true;
+                            if (relatedTeamEntity.CountryId == relatedTeam.CountryId)
+                            {
+                                isSameCountry = true;
+                            }
                         }
                     }
                     if (isSameCountry)

@@ -9,6 +9,7 @@ namespace Domain.Entities
         public int? GroupId { get; set; }
         public virtual Group Group { get; set; }
         public virtual Country Country{ get; set; }
+        public virtual ICollection<GroupTeam> GroupTeams { get; set; }
 
         public Team()
         {

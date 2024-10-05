@@ -6,6 +6,7 @@ public class Group : Entity<int>
     public string MatchName{ get; set; }
     public string Name { get; set; }
     public virtual ICollection<Team> Teams { get; set; }
+    public virtual ICollection<GroupTeam> GroupTeams { get; set; }
     public Group()
     {
     }

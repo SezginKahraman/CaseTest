@@ -15,6 +15,8 @@ namespace Domain.Entities
 
         public string Email { get; set; } = string.Empty;
 
+        public virtual ICollection<Draw> Draws { get; set; }
+
         public Picker()
         {
             FirstName = string.Empty;

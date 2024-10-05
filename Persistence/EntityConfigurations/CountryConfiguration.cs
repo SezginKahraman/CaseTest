@@ -27,42 +27,50 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
 
         Country turkey = new()
         {
-            Id = int.Parse("d2bc1850-e738-49a2-b262-08dbe128c8cd"),
+            Id = 1,
             Name = "Turkiye",
+            CountryCode = "TR",
         };
         Country germany = new()
         {
-            Id = int.Parse("d3749aac-ed3e-442e-8206-d508b1b94dcc"),
+            Id = 2,
             Name = "Almanya",
+            CountryCode = "GE",
         };
         Country france = new()
         {
-            Id = int.Parse("2fafbee5-f65d-48a5-8637-270a9ae5cd4c"),
+            Id = 3,
+            CountryCode = "FR",
             Name = "Fransa",
         };
         Country netherlands = new()
         {
-            Id = int.Parse("34a9d6f9-26aa-4cc6-96fc-7cf6f46e13eb"),
+            Id = 4,
+            CountryCode = "NL",
             Name = "Hollanda",
         };
         Country portugal = new()
         {
-            Id = int.Parse("f5f76ad1-25ba-452c-90c0-2c1f33df58db"),
+            Id = 5,
+            CountryCode = "PR",
             Name = "Portekiz",
         };
         Country italy = new()
         {
-            Id = int.Parse("35cd46ac-8347-48c1-8e5b-c631eb655d79"),
+            Id = 6,
+            CountryCode = "IT",
             Name = "Italya",
         };
         Country spain = new()
         {
-            Id = int.Parse("a7170631-6b14-4e7e-b2a9-22bb1403ab8a"),
+            Id = 7,
+            CountryCode = "ES",
             Name = "Ispanya",
         };
         Country belgium = new()
         {
-            Id = int.Parse("4067b3e2-d378-46a4-a25b-cc5be4c24472"),
+            Id = 8,
+            CountryCode = "BE",
             Name = "Belcika",
         };
         countries.Add(turkey);

@@ -47,8 +47,10 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
             await _groupBusinessRules.NumberOfGroupsMustFourOrEight(request.GroupCount);
 
             var groupResults = await _groupRepository.GetListAsync(size:request.GroupCount);
+            Random random = new Random();
+
             var teamsResult = await _teamRepository.GetListAsync(size:32);
-            var teams = teamsResult.Items.ToList();
+            var teams = teamsResult.Items.OrderBy(t => random.Next()).ToList();
 
             var groups = groupResults.Items.ToList();
 
@@ -56,21 +58,14 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
 
             await _drawRepository.AddAsync(draw);
 
-            Random random = new Random();
-            List<int> numbers = Enumerable.Range(0, 33).ToList();
-
             var groupTeamList = new List<GroupTeam>();
+            var index = 0;
 
             foreach (var group in groups)
             {
-                while (numbers.Any())
+                while (teams.Any())
                 {
-                    // Rastgele bir indeks seç
-                    int randomIndex = random.Next(numbers.Count);
-
-                    // Seçilen elemaný çýkar ve yazdýr
-                    int selectedNumber = numbers[randomIndex];
-                    var relatedTeam = teams[selectedNumber];
+                    var relatedTeam = teams[index];
                     var relatedGroups = groupTeamList.Where(t => t.GroupId == group.Id);
                     var isSameCountry = false;
 
@@ -97,12 +92,13 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
                     };
 
                     // Elemaný listeden çýkar
-                    numbers.RemoveAt(randomIndex);
+                    teams.RemoveAt(index);
                     groupTeamList.Add(groupTeam);
                     if(groupTeamList.Count != request.GroupCount)
                     {
                         continue;
                     }
+                    index++;
                 }
             }
 

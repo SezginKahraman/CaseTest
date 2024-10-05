@@ -13,7 +13,7 @@ namespace Persistence.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Picker> builder)
         {
-            builder.ToTable("Countries").HasKey(c => c.Id);
+            builder.ToTable("Pickers").HasKey(c => c.Id);
 
             builder.Property(c => c.Id).HasColumnName("Id").IsRequired();
             builder.Property(c => c.CreatedDate).HasColumnName("CreatedDate").IsRequired();

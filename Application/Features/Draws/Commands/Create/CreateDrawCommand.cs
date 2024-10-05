@@ -46,8 +46,8 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
         {
             await _groupBusinessRules.NumberOfGroupsMustFourOrEight(request.GroupCount);
 
-            var groupResults = await _groupRepository.GetListAsync(size: request.GroupCount);
-            var teamsResult = await _teamRepository.GetListAsync(size: 32);
+            var groupResults = await _groupRepository.GetListAsync(size:request.GroupCount);
+            var teamsResult = await _teamRepository.GetListAsync(size:32);
             var teams = teamsResult.Items.ToList();
 
             var groups = groupResults.Items.ToList();
@@ -60,51 +60,46 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
             List<int> numbers = Enumerable.Range(0, 33).ToList();
 
             var groupTeamList = new List<GroupTeam>();
-            var isBreak = false;
 
-            for (int j = 0; j < request.GroupCount; j++)
+            foreach (var group in groups)
             {
-                for (int i = 1; i <= groups.Count; i++)
+                while (numbers.Any())
                 {
-                    while (numbers.Any())
+                    // Rastgele bir indeks seç
+                    int randomIndex = random.Next(numbers.Count);
+
+                    // Seçilen elemaný çýkar ve yazdýr
+                    int selectedNumber = numbers[randomIndex];
+                    var relatedTeam = teams[selectedNumber];
+                    var relatedGroups = groupTeamList.Where(t => t.GroupId == groups[i].Id);
+                    var isSameCountry = false;
+
+                    foreach (var relatedGroupTeam in relatedGroups)
                     {
-                        // Rastgele bir indeks seç
-                        int randomIndex = random.Next(numbers.Count);
-
-                        // Seçilen elemaný çýkar ve yazdýr
-                        int selectedNumber = numbers[randomIndex];
-                        var relatedTeam = teams[selectedNumber];
-                        var relatedGroups = groupTeamList.Where(t => t.GroupId == groups[i].Id);
-                        var isSameCountry = false;
-
-                        foreach (var relatedGroupTeam in relatedGroups)
+                        var relatedTeamEntity = teams.FirstOrDefault(t => t.Id == relatedGroupTeam.TeamId);
+                        if(relatedTeamEntity.CountryId == relatedTeam.CountryId)
                         {
-                            var relatedTeamEntity = teams.FirstOrDefault(t => t.Id == relatedGroupTeam.TeamId);
-                            if (relatedTeamEntity.CountryId == relatedTeam.CountryId)
-                            {
-                                isSameCountry = true;
-                            }
+                            isSameCountry = true;
                         }
-                        if (isSameCountry)
-                        {
-                            continue;
-                        }
-
-                        isSameCountry = false;
-
-                        GroupTeam groupTeam = new GroupTeam()
-                        {
-                            TeamId = relatedTeam.Id,
-                            GroupId = groups[i].Id,
-                            DrawId = draw.Id
-                        };
-                        isBreak = true;
-
-                        // Elemaný listeden çýkar
-                        numbers.RemoveAt(randomIndex);
-                        groupTeamList.Add(groupTeam);
                     }
-                    if (isBreak)
+                    if (isSameCountry)
+                    {
+                        continue;
+                    }
+
+                    isSameCountry = false;
+
+                    GroupTeam groupTeam = new GroupTeam()
+                    {
+                        TeamId = relatedTeam.Id,
+                        GroupId = group.Id,
+                        DrawId = draw.Id
+                    };
+
+                    // Elemaný listeden çýkar
+                    numbers.RemoveAt(randomIndex);
+                    groupTeamList.Add(groupTeam);
+                    if(groupTeamList.Count != request.GroupCount)
                     {
                         continue;
                     }

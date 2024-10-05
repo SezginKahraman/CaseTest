@@ -139,7 +139,7 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
                  GroupName = groupResults.Items.FirstOrDefault(t => t.Id == g.Key)?.Name,
                  Teams = g.Select(t => new TeamResponse
                  {
-                     Name = teamsResult.Items.FirstOrDefault(s => s.Id == t.Id)?.Name
+                     Name = teamsResult.Items.FirstOrDefault(s => s.Id == t.TeamId)?.Name
                  }).ToList()
              }).ToList();
 

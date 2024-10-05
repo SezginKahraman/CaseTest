@@ -47,7 +47,7 @@ public class CreateDrawCommand : IRequest<CreatedDrawResponse>
             await _groupBusinessRules.NumberOfGroupsMustFourOrEight(request.GroupCount);
 
             var groupResults = await _groupRepository.GetListAsync(size:request.GroupCount);
-            var teamsResult = await _teamRepository.GetListAsync();
+            var teamsResult = await _teamRepository.GetListAsync(size:32);
             var teams = teamsResult.Items.ToList();
 
             var groups = groupResults.Items.ToList();
